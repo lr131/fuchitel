@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.mail import send_mail, EmailMessage
 from django.conf import settings
+
 from django.http import HttpResponse
 from django.views.generic import ListView
 from docx.enum.text import WD_PARAGRAPH_ALIGNMENT
@@ -16,13 +19,15 @@ from .models import Applicant
 from .forms import ApplicantForm, EmailForm, SearchForm
 from email.mime import application
 
+@login_required
 def index(request):
     return render(request, 'polls/index.html')
 
+@login_required
 def help_me(request):
     return render(request, 'polls/help.html')
 
-
+@login_required
 def edit(request, pk):
     applicant = get_object_or_404(Applicant, pk=pk)
     if request.method == "POST":
@@ -39,6 +44,7 @@ def edit(request, pk):
         context = {'applicant': applicant, 'form': form}
         return render(request, "polls/create.html", context=context)
 
+@login_required
 def create(request):
     if request.method == "POST":
         form = ApplicantForm(request.POST)
@@ -49,17 +55,20 @@ def create(request):
         form = ApplicantForm()
         return render(request, "polls/create.html", {"form": form})
 
+@login_required
 def detail(request, pk):
     form = EmailForm(request.POST)
     applicant = get_object_or_404(Applicant, pk=pk)
     context = {'applicant': applicant, 'form': form}
     return render(request, 'polls/detail.html', context=context)
 
+@login_required
 def delete(request, pk):
     applicant = get_object_or_404(Applicant, pk=pk)
     applicant.delete()
     return redirect('index')
 
+@login_required
 def get_doc(pk):
     applicant = get_object_or_404(Applicant, pk=pk)
     
@@ -117,6 +126,7 @@ def get_doc(pk):
 
     return filename
 
+@login_required
 def send(request, pk):
     applicant = get_object_or_404(Applicant, pk=pk)
     form = EmailForm(request.POST)
@@ -138,7 +148,7 @@ def send(request, pk):
         
     return redirect('detail', pk=applicant.pk)
 
-class SearchResultsView(ListView):
+class SearchResultsView(LoginRequiredMixin, ListView):
     model = Applicant
     template_name = 'polls/search.html'
     
