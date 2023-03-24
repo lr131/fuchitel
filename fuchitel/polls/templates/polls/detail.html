@@ -4,6 +4,7 @@
 
 <div class="container">
     <div class="row">
+        <a href="{% url 'file' applicant.pk %}" target="_blank" type="button" class="btn btn-success">Скачать</a>
         <form method="POST" action={% url 'send' applicant.pk %} class="form-inline align-items-left">
             {% csrf_token %}
             <div class="col-6">

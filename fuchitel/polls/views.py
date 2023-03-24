@@ -4,7 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.mail import send_mail, EmailMessage
 from django.conf import settings
 
-from django.http import HttpResponse
+from django.http import HttpResponse, FileResponse
 from django.views.generic import ListView
 from docx.enum.text import WD_PARAGRAPH_ALIGNMENT
 from docx.enum.table import WD_ALIGN_VERTICAL
@@ -68,7 +68,7 @@ def delete(request, pk):
     applicant.delete()
     return redirect('index')
 
-@login_required
+  
 def get_doc(pk):
     applicant = get_object_or_404(Applicant, pk=pk)
     
@@ -121,10 +121,18 @@ def get_doc(pk):
         row_cells[1].vertical_alignment = WD_ALIGN_VERTICAL.CENTER
 
  
-    filename = os.path.join(settings.EMAIL_FILES, 'form.docx') 
+    filename = os.path.join(settings.EMAIL_FILES, 'summary.docx') 
     document.save(filename)
 
     return filename
+
+@login_required
+def get_file(request, pk):
+    filename = get_doc(pk)
+    file = open(filename, 'rb')
+    response = FileResponse(file)
+    return response
+
 
 @login_required
 def send(request, pk):
