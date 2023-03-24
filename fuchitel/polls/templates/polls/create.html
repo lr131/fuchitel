@@ -1,0 +1,258 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+    
+    {% for field in form %}
+        {% if field.errors%}
+            {% for error in field.errors %}
+                <div class="alert alert-warning" role="alert">
+                    {{error}}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endfor %}
+
+    <form method="POST" enctype="multipart/form-data" class="form">
+        {% csrf_token %}
+        <div class='hidden' hidden>
+            {{form.questionnaire_num}}
+        </div>
+        {% if applicant %}
+            <legend class='row justify-content-between'>
+                <div class='col-4'>
+                    {% if applicant %}
+                      Анкета {{applicant.questionnaire_num}} 
+                      <button type="button" class="btn btn-outline-secondary" disabled="disabled">В черный список</button>
+                    {% endif %}
+                </div>
+                <div class='col-2'>
+                    <button type="submit" class="btn btn-primary ">Сохранить</button>
+                </div>
+            </legend>
+        {% endif %}
+
+        {% comment %} основная инфа {% endcomment %}
+        <div class="row">
+            <div class="form-group col-3">
+                {% if applicant and applicant.image %}
+                    <img src="{{ applicant.image.url }}"
+                    alt="{{ applicant.family|default_if_none:"" }} {{ applicant.name|default_if_none:""  }} {{ applicant.patr|default_if_none:""  }}" 
+                    class="img-thumbnail" style="height: 150px;">
+                {% endif %}
+                {{form.image.label_tag}}
+                {{form.image}}
+                
+            </div>
+            
+
+            <div class="row col-8">
+
+                <div class="row">
+                    <div class="form-group col">
+                        {{form.family}}
+                    </div>
+        
+                    <div class="form-group col">
+                        {{form.name}}
+                    </div>
+        
+                    <div class="form-group col">
+                        {{form.patr}}
+                    </div>
+                    <div class="form-group col">
+                        {{form.bdate}}
+						<small id="emailHelp" class="form-text text-muted">Формат ДД.ММ.ГГГГ</small>
+                    </div>  
+                </div>
+
+                <div class="row">
+                    <div class="form-group col">
+                        {{form.position.label}}
+                        {{form.position}}
+                    </div>
+                    <div class="form-group col">
+                        Мин. з/п
+                        {{form.minimum_wage}}
+                    </div>
+                   
+                    <div class="form-group col">
+                        {{form.addictions.label}}
+                        {{form.addictions}}
+                    </div>
+        
+                    <div class="form-group col">
+                        {{form.phone.label}}
+                        {{form.phone}}
+                    </div>
+                </div>
+
+                
+            </div>
+
+        </div>
+        
+        <div class="row" hidden>
+            <div class="col-4">
+                <div class="form-check">
+                    {{form.black_list}}
+                  <label class="form-check-label" for="{{form.black_list.id_for_label}}">
+                    {{form.black_list.label}}
+                  </label>
+                </div>
+              </div>
+        </div>
+
+        <div class="row">
+                      
+            
+        </div>
+
+        <div class="row">
+            <div class='col-6'>
+                <legend>Адрес</legend>
+                <div class="form-group">
+                    {{form.registration.label}}
+                    {{form.registration}}
+                </div>
+                <div class="form-group">
+                    {{form.address.label}}
+                    {{form.address}}
+                </div>
+                <div class="form-group">
+                    {{form.district.label}}
+                    {{form.district}}
+                </div>
+
+                <legend>Образование</legend>
+                <div class="form-group">
+                    {{form.education.label}}
+                    {{form.education}}
+                </div>
+                <div class="form-group">
+                    {{form.education_descr.label}}
+                    {{form.education_descr}}
+                </div>
+            </div>
+
+            {% comment %} Про работу {% endcomment %}
+            <div class='col-6'>
+                <legend>Работа</legend>
+                <div class='row'>
+                    <div class="form-group col-6">
+                        {{form.work_activity.label}}
+                        {{form.work_activity}}
+                    </div>
+                    <div class="form-group col-6">
+                        {{form.schedule.label}}
+                        {{form.schedule}}
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class="form-group col-6">
+                        {{form.experience.label}}
+                        {{form.experience}}
+                    </div>
+                    <div class="form-group col-6">
+                        {{form.work_experience.label}}
+                        {{form.work_experience}}
+                    </div>
+                </div>
+                
+                <div class='row'>
+                    <div class="form-group col">
+                        {{form.child_age.label}}
+                        {{form.child_age}}
+                    </div>
+                </div>
+                <legend>Документы</legend>
+                <div class='row'>
+                    <div class="form-group col">
+                        {{form.international_passport.label}}
+                        {{form.international_passport}}
+                    </div>
+                    <div class="form-group col">
+                        {{form.driver_license.label}}
+                        {{form.driver_license}}
+                    </div>
+                </div>
+
+                <legend>Паспортные данные</legend>
+                <div class="row">
+                    <div class="form-group col">
+                        Документ
+                        {{form.doc_type}}
+                    </div>
+                    <div class="form-group col">
+                        {{form.doc_ser.label}}
+                        {{form.doc_ser}}
+                    </div>
+                    <div class="form-group col-6">
+                        {{form.doc_num.label}}
+                        {{form.doc_num}}
+                    </div>
+                    <div class="form-group col-6">
+                        {{form.doc_date.label}}
+                        {{form.doc_date}}
+                    </div>
+                    <div class="form-group col-6">
+                        {{form.doc_by.label}}
+                        {{form.doc_by}}
+                    </div>
+                </div>
+                
+            </div>
+
+        </div>
+
+
+
+        {% comment %} Документы {% endcomment %}
+        
+        <div class="row">
+            <div class="col-6">
+                <legend>Доп.сведения</legend>
+                <div class="row">
+                    <div class="form-group col-6">
+                        {{form.nationality.label}}
+                        {{form.nationality}}
+                    </div>
+                    <div class="form-group col-6">
+                        {{form.religion.label}}
+                        {{form.religion}}
+                    </div>
+                    <div class="form-group col">
+                        {{form.marital_status.label}}
+                        {{form.marital_status}}
+                    </div>
+                    
+                    <div class="form-group col-6">
+                        {{form.hobby.label}}
+                        {{form.hobby}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <legend>Примечания</legend>
+                <div class="row">
+                    <div class="form-group col-12">
+                        {{form.note}}
+                    </div>
+                </div>
+            </div>
+
+            
+        </div>
+ 
+
+
+        <div class="row">
+            <button type="submit" class="btn btn-primary">Сохранить</button>
+        </div>
+
+    </form>
+</div>
+
+{% endblock %}

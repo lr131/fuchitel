@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <form method="POST" action={% url 'send' applicant.pk %} class="form-inline align-items-left">
+            {% csrf_token %}
+            <div class="col-6">
+                <div class="input-group">
+                  <div class="input-group-text">@</div>
+                  <input type="email" class="form-control" id="specificSizeInputGroupUsername" placeholder="email получателя" name="email" required="" id="id_email">
+                </div>            
+            </div>
+            <div class="col-4">
+                <button type="submit" class="btn btn-primary">Отправить по email</button>
+                {% comment %} <a href="{% url 'send' applicant.pk %}" role="button" class="btn btn-info">Отправить по email</a> {% endcomment %}
+            </div>
+        </form>
+        <div class="col-5">
+            <a href="{% url 'edit' applicant.pk %}" role="button" class="btn btn-default col-6">Редактировать</a>
+            <a href="{% url 'delete' applicant.pk %}" role="button" class="btn btn-danger col-3">Удалить</a>
+        </div>
+    </div>
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">Анкета</th>
+      <th scope="col">{{ applicant.questionnaire_num }}</th>
+    </tr>  
+        <tr>
+        <th scope="col">
+            {% if applicant.image %}
+                <img src="{{ applicant.image.url }}"
+                alt="{{ applicant.family|default_if_none:"" }} {{ applicant.name|default_if_none:""  }} {{ applicant.patr|default_if_none:""  }}" 
+                class="img-thumbnail" style="height: 150px;">
+            {% else %}
+                НЕТ ФОТО
+            {% endif %}
+        </th>
+        <th scope="col">{{ applicant.family|default_if_none:"" }} {{ applicant.name|default_if_none:""  }} {{ applicant.patr|default_if_none:""  }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+        <th scope="row">Дата рождения</th>
+        <td>{{ applicant.bdate|default_if_none:"Не указано"|date:"d.m.Y" }} (Возраст <b>{{applicant.age|default_if_none:"Нет данных"}}</b>)</td>
+        </tr>
+        <tr>
+            <th scope="row">Соискатель на место</th>
+            <td>{{ applicant.position|default_if_none:"Не указано"  }}</td>
+            </tr>
+        <tr>
+        <th scope="row">Фактический адрес</th>
+        <td>{{ applicant.address|default_if_none:"Не указано"  }}</td>
+        </tr>
+        <tr>
+        <th scope="row">Образование</th>
+        <td>{{ applicant.education|default_if_none:"Не указано" }}</td>
+        </tr>
+        <tr>
+        <th scope="row"></th>
+        <td>{{ applicant.education_descr|default_if_none:"Не указано"  }}</td>
+        </tr>
+        <tr>
+        <th scope="row">Опыт работы (Общий пед/мед стаж)</th>
+        <td>{{ applicant.experience|default_if_none:"Не указано"  }}</td>
+        </tr>
+        <tr>
+        <th scope="row">Опыт работы в семьях</th>
+        <td>{{ applicant.work_experience|default_if_none:"Не указано"  }}</td>
+        </tr>
+        <tr>
+        <th scope="row">Желаемый график работы</th>
+        <td>{{ applicant.schedule|default_if_none:"Не указано"  }}</td>
+        </tr>
+        <tr>
+        <th scope="row">Семейное положение</th>
+        <td>{{ applicant.marital_status|default_if_none:"Не указано"|default:"Нет" }}</td>
+        </tr>
+        <tr>
+        <th scope="row">Загран.паспорт</th>
+        <td>{{ applicant.international_passport|default_if_none:"Не указано"|default:"Нет" }}</td>
+        </tr>
+        <tr>
+        <th scope="row">Водительские права</th>
+        <td>
+            {{applicant.driver_license|default_if_none:"Не указано"|default:"Нет"}}
+        
+        </td>
+        </tr>
+        <tr>
+        <th scope="row">Вредные привычки</th>
+        <td>{{applicant.addictions|default_if_none:"Не указано"|default:"Нет"}}</td>
+
+        </tr>
+        <tr>
+        <th scope="row">Хобби, увлечения</th>
+        <td>{{ applicant.hobby|default_if_none:"Не указано"  }}</td>
+        </tr>
+        <tr>
+        <th scope="row">Национальность</th>
+        <td>{{ applicant.nationality|default_if_none:"Не указано"  }}</td>
+        </tr>
+    </tbody>
+    </table>
+</div>
+
+
+{% endblock %}

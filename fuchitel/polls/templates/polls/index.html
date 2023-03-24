@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+      <h1 class="display-4">Поиск</h1>
+      <p class="lead">Выберие нужный фильтр или настройте свой. Затем нажмите кнопку "Искать"</p>
+    </div>
+
+    <div class="container">
+        
+        <form class="form-inline" action="{% url 'search' %}" method="GET">
+          <label class="sr-only" for="inlineFormInputName2">Search</label>
+          <input name="q" type="text" class="form-control col-sm-10 mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Введите текст">      
+            
+          <button type="submit" class="btn btn-primary mb-2">Искать</button>
+        </form>
+        <small id="emailHelp" class="form-text text-muted">Вводите фамилию, имя или отчество с большой буквы</small>
+        
+        <fieldset class="form-group">
+          <div class="row">
+            <div class="col-sm-10">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+                <label class="form-check-label" for="gridRadios1">
+                  Поиск по ФИО или номеру анкеты
+                </label>
+              </div>
+
+              {% comment %} <div class="form-check">
+                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+                <label class="form-check-label" for="gridRadios2">
+                  Запрос по возрасту (диапазоны отобразятся, сделать всплывающие подсказки)
+                </label>
+              </div>
+
+              <div class="form-check">
+                  <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+                  <label class="form-check-label" for="gridRadios2">
+                    Запрос по графику работы (сделать селект)
+                  </label>
+              </div> {% endcomment %}
+
+            </div>
+          </div>
+      </fieldset>
+
+    </div>
+
+    {% endblock %}
