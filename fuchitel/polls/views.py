@@ -19,6 +19,9 @@ from .models import Applicant
 from .forms import ApplicantForm, EmailForm, SearchForm
 from email.mime import application
 
+def login(request):
+    return render(request, 'polls/login.html')
+
 @login_required
 def index(request):
     return render(request, 'polls/index.html')

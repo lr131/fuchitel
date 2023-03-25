@@ -137,3 +137,6 @@ MEDIA_URL = '/media/'
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 EMAIL_FILES = os.path.join(BASE_DIR, 'files')
+
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = '/'
