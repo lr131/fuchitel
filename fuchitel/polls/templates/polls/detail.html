@@ -4,23 +4,23 @@
 
 <div class="container">
     <div class="row">
-        <a href="{% url 'file' applicant.pk %}" target="_blank" type="button" class="btn btn-success">Скачать</a>
+        <a href="{% url 'file' applicant.pk %}" target="_blank" type="button" class="btn btn-success col-md-2 m-3">Скачать</a>
         <form method="POST" action={% url 'send' applicant.pk %} class="form-inline align-items-left">
             {% csrf_token %}
-            <div class="col-6">
+            <div class="col-md-6 m-3">
                 <div class="input-group">
                   <div class="input-group-text">@</div>
                   <input type="email" class="form-control" id="specificSizeInputGroupUsername" placeholder="email получателя" name="email" required="" id="id_email">
                 </div>            
             </div>
-            <div class="col-4">
+            <div class="col-md-4 m-3">
                 <button type="submit" class="btn btn-primary">Отправить по email</button>
                 {% comment %} <a href="{% url 'send' applicant.pk %}" role="button" class="btn btn-info">Отправить по email</a> {% endcomment %}
             </div>
         </form>
         <div class="col-5">
-            <a href="{% url 'edit' applicant.pk %}" role="button" class="btn btn-default col-6">Редактировать</a>
-            <a href="{% url 'delete' applicant.pk %}" role="button" class="btn btn-danger col-3">Удалить</a>
+            <a href="{% url 'edit' applicant.pk %}" role="button" class="btn btn-default col-md-6 m-3">Редактировать</a>
+            <a href="{% url 'delete' applicant.pk %}" role="button" class="btn btn-danger col-md-3 m-3">Удалить из базы</a>
         </div>
     </div>
   <table class="table">

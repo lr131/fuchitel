@@ -21,13 +21,13 @@
         </div>
         {% if applicant %}
             <legend class='row justify-content-between'>
-                <div class='col-4'>
+                <div class='col-md-4 m-3'>
                     {% if applicant %}
                       Анкета {{applicant.questionnaire_num}} 
-                      <button type="button" class="btn btn-outline-secondary" disabled="disabled">В черный список</button>
+                      <button type="button" class="btn btn-outline-secondary m-3" disabled="disabled">В черный список</button>
                     {% endif %}
                 </div>
-                <div class='col-2'>
+                <div class='col-md-2 m-3'>
                     <button type="submit" class="btn btn-primary ">Сохранить</button>
                 </div>
             </legend>
@@ -35,7 +35,7 @@
 
         {% comment %} основная инфа {% endcomment %}
         <div class="row">
-            <div class="form-group col-3">
+            <div class="form-group col-md-3 m-3">
                 {% if applicant and applicant.image %}
                     <img src="{{ applicant.image.url }}"
                     alt="{{ applicant.family|default_if_none:"" }} {{ applicant.name|default_if_none:""  }} {{ applicant.patr|default_if_none:""  }}" 
@@ -47,21 +47,21 @@
             </div>
             
 
-            <div class="row col-8">
+            <div class="row col-md-8 m-3">
 
                 <div class="row">
-                    <div class="form-group col">
+                    <div class="form-group col-md-4 col-6">
                         {{form.family}}
                     </div>
         
-                    <div class="form-group col">
+                    <div class="form-group col-md-4 col-6">
                         {{form.name}}
                     </div>
         
-                    <div class="form-group col">
+                    <div class="form-group col-md-4 col-6">
                         {{form.patr}}
                     </div>
-                    <div class="form-group col">
+                    <div class="form-group col-md-4 col-6">
                         {{form.bdate}}
 						<small id="emailHelp" class="form-text text-muted">Формат ДД.ММ.ГГГГ</small>
                     </div>  
@@ -110,7 +110,7 @@
         </div>
 
         <div class="row">
-            <div class='col-6'>
+            <div class='col-md-6 col-12'>
                 <legend>Адрес</legend>
                 <div class="form-group">
                     {{form.registration.label}}
@@ -137,42 +137,42 @@
             </div>
 
             {% comment %} Про работу {% endcomment %}
-            <div class='col-6'>
+            <div class='col-md-6 col-12'>
                 <legend>Работа</legend>
                 <div class='row'>
-                    <div class="form-group col-6">
+                    <div class="form-group col-md-6 col-12">
                         {{form.work_activity.label}}
                         {{form.work_activity}}
                     </div>
-                    <div class="form-group col-6">
+                    <div class="form-group col-md-6 col-12">
                         {{form.schedule.label}}
                         {{form.schedule}}
                     </div>
                 </div>
                 <div class='row'>
-                    <div class="form-group col-6">
+                    <div class="form-group col-md-6 col-12">
                         {{form.experience.label}}
                         {{form.experience}}
                     </div>
-                    <div class="form-group col-6">
+                    <div class="form-group col-md-6 col-12">
                         {{form.work_experience.label}}
                         {{form.work_experience}}
                     </div>
                 </div>
                 
                 <div class='row'>
-                    <div class="form-group col">
+                    <div class="form-group col-md-6 col-12">
                         {{form.child_age.label}}
                         {{form.child_age}}
                     </div>
                 </div>
                 <legend>Документы</legend>
                 <div class='row'>
-                    <div class="form-group col">
+                    <div class="form-group col-md-6 col-12">
                         {{form.international_passport.label}}
                         {{form.international_passport}}
                     </div>
-                    <div class="form-group col">
+                    <div class="form-group col-md-6 col-12">
                         {{form.driver_license.label}}
                         {{form.driver_license}}
                     </div>
@@ -180,23 +180,23 @@
 
                 <legend>Паспортные данные</legend>
                 <div class="row">
-                    <div class="form-group col">
+                    <div class="form-group col-md-6 col-12">
                         Документ
                         {{form.doc_type}}
                     </div>
-                    <div class="form-group col">
+                    <div class="form-group col-md-6 col-12">
                         {{form.doc_ser.label}}
                         {{form.doc_ser}}
                     </div>
-                    <div class="form-group col-6">
+                    <div class="form-group col-md-6 col-12">
                         {{form.doc_num.label}}
                         {{form.doc_num}}
                     </div>
-                    <div class="form-group col-6">
+                    <div class="form-group col-md-6 col-12">
                         {{form.doc_date.label}}
                         {{form.doc_date}}
                     </div>
-                    <div class="form-group col-6">
+                    <div class="form-group col-md-6 col-12">
                         {{form.doc_by.label}}
                         {{form.doc_by}}
                     </div>
@@ -211,14 +211,14 @@
         {% comment %} Документы {% endcomment %}
         
         <div class="row">
-            <div class="col-6">
+            <div class="col-md-6 col-12">
                 <legend>Доп.сведения</legend>
                 <div class="row">
-                    <div class="form-group col-6">
+                    <div class="form-group col-md-6 col-12">
                         {{form.nationality.label}}
                         {{form.nationality}}
                     </div>
-                    <div class="form-group col-6">
+                    <div class="form-group col-md-6 col-12">
                         {{form.religion.label}}
                         {{form.religion}}
                     </div>
@@ -227,14 +227,14 @@
                         {{form.marital_status}}
                     </div>
                     
-                    <div class="form-group col-6">
+                    <div class="form-group col-md-6 col-12">
                         {{form.hobby.label}}
                         {{form.hobby}}
                     </div>
                 </div>
             </div>
 
-            <div class="col-6">
+            <div class="col-md-6 col-12">
                 <legend>Примечания</legend>
                 <div class="row">
                     <div class="form-group col-12">
@@ -249,7 +249,7 @@
 
 
         <div class="row">
-            <button type="submit" class="btn btn-primary">Сохранить</button>
+            <button type="submit" class="btn btn-primary col-md-3 col-12">Сохранить</button>
         </div>
 
     </form>

@@ -33,3 +33,4 @@ class ApplicantForm(forms.ModelForm):
             'hobby': forms.Textarea(attrs={'rows': 3, 'class': 'form-control'}),
             'black_list': forms.CheckboxInput(attrs={'class': 'form-check-input'})
         }
+        
