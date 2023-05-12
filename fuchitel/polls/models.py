@@ -190,6 +190,7 @@ class Applicant(models.Model):
             driver_license = "Не указано"
         
         return {
+            "Телефон": f"{self.phone}" if self.phone else "Не указан",
             "Фактический адрес": f"{self.address}" if self.address else "Не указан",
             "Образование": '\n'.join((f"{self.education.name}\n" if self.education else "", 
                                      f"{self.education_descr}" if self.education_descr else "Не указано")),
@@ -207,10 +208,11 @@ class Applicant(models.Model):
                             lambda x: ': '.join(x), 
                             {
                                 "Хобби, увлечения": f"{self.hobby}" if self.hobby else "Не указано",
-                                "Национальность": f"{self.nationality}" if self.nationality else "Не указана"
+                                "Национальность": f"{self.nationality}" if self.nationality else "Не указана",
+                                "Примечания": f"{self.note}" if self.note else ""
                             }.items())
                     )
-                )
+                ),
         }
     
     class Meta:

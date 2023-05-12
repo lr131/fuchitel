@@ -26,11 +26,11 @@ class ApplicantForm(forms.ModelForm):
         model = Applicant
         fields = '__all__'
         widgets = {
-            'registration': forms.Textarea(attrs={'rows': 3, 'class': 'form-control'}),
-            'address': forms.Textarea(attrs={'rows': 3, 'class': 'form-control'}),
+            'registration': forms.Textarea(attrs={'rows': 2, 'class': 'form-control'}),
+            'address': forms.Textarea(attrs={'rows': 2, 'class': 'form-control'}),
             'note': forms.Textarea(attrs={'rows': 3, 'class': 'form-control'}),
-            'education_descr': forms.Textarea(attrs={'rows': 3, 'class': 'form-control'}),
-            'hobby': forms.Textarea(attrs={'rows': 3, 'class': 'form-control'}),
+            'education_descr': forms.Textarea(attrs={'rows': 2, 'class': 'form-control'}),
+            'hobby': forms.Textarea(attrs={'rows': 1, 'class': 'form-control'}),
             'black_list': forms.CheckboxInput(attrs={'class': 'form-check-input'})
         }
         

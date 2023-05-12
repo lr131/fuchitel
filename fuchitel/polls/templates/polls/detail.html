@@ -7,20 +7,20 @@
         <a href="{% url 'file' applicant.pk %}" target="_blank" type="button" class="btn btn-success col-md-2 m-3">Скачать</a>
         <form method="POST" action={% url 'send' applicant.pk %} class="form-inline align-items-left">
             {% csrf_token %}
-            <div class="col-md-6 m-3">
+            <div class="col-10 col-md-6 m-3">
                 <div class="input-group">
                   <div class="input-group-text">@</div>
                   <input type="email" class="form-control" id="specificSizeInputGroupUsername" placeholder="email получателя" name="email" required="" id="id_email">
                 </div>            
             </div>
-            <div class="col-md-4 m-3">
-                <button type="submit" class="btn btn-primary">Отправить по email</button>
+            <div class="col-10 col-md-4 m-3">
+                <button type="submit" class="btn btn-primary col-12">Отправить по email</button>
                 {% comment %} <a href="{% url 'send' applicant.pk %}" role="button" class="btn btn-info">Отправить по email</a> {% endcomment %}
             </div>
         </form>
-        <div class="col-5">
+        <div class="col-10 col-md-5">
             <a href="{% url 'edit' applicant.pk %}" role="button" class="btn btn-default col-md-6 m-3">Редактировать</a>
-            <a href="{% url 'delete' applicant.pk %}" role="button" class="btn btn-danger col-md-3 m-3">Удалить из базы</a>
+            <a href="{% url 'delete' applicant.pk %}" role="button" class="btn btn-danger col-md-4 m-3">Удалить из базы</a>
         </div>
     </div>
   <table class="table">
@@ -43,66 +43,71 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
+      <tr>
         <th scope="row">Дата рождения</th>
         <td>{{ applicant.bdate|default_if_none:"Не указано"|date:"d.m.Y" }} (Возраст <b>{{applicant.age|default_if_none:"Нет данных"}}</b>)</td>
         </tr>
-        <tr>
-            <th scope="row">Соискатель на место</th>
-            <td>{{ applicant.position|default_if_none:"Не указано"  }}</td>
-            </tr>
-        <tr>
+        
+      <tr>
+        <th scope="row">Соискатель на место</th>
+          <td>{{ applicant.position|default_if_none:"Не указано"  }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Телефон</th>
+          <td>{{ applicant.phone|default_if_none:"Не указано"  }}</td>
+      </tr>
+      <tr>
+      <tr>
         <th scope="row">Фактический адрес</th>
         <td>{{ applicant.address|default_if_none:"Не указано"  }}</td>
-        </tr>
-        <tr>
+      </tr>
         <th scope="row">Образование</th>
-        <td>{{ applicant.education|default_if_none:"Не указано" }}</td>
-        </tr>
-        <tr>
-        <th scope="row"></th>
         <td>{{ applicant.education_descr|default_if_none:"Не указано"  }}</td>
-        </tr>
-        <tr>
+      </tr>
+      <tr>
         <th scope="row">Опыт работы (Общий пед/мед стаж)</th>
         <td>{{ applicant.experience|default_if_none:"Не указано"  }}</td>
-        </tr>
-        <tr>
+      </tr>
+      <tr>
         <th scope="row">Опыт работы в семьях</th>
         <td>{{ applicant.work_experience|default_if_none:"Не указано"  }}</td>
-        </tr>
-        <tr>
+      </tr>
+      <tr>
         <th scope="row">Желаемый график работы</th>
         <td>{{ applicant.schedule|default_if_none:"Не указано"  }}</td>
-        </tr>
-        <tr>
+      </tr>
+      <tr>
         <th scope="row">Семейное положение</th>
         <td>{{ applicant.marital_status|default_if_none:"Не указано"|default:"Нет" }}</td>
-        </tr>
-        <tr>
+      </tr>
+      <tr>
         <th scope="row">Загран.паспорт</th>
         <td>{{ applicant.international_passport|default_if_none:"Не указано"|default:"Нет" }}</td>
-        </tr>
-        <tr>
+      </tr>
+      <tr>
         <th scope="row">Водительские права</th>
         <td>
-            {{applicant.driver_license|default_if_none:"Не указано"|default:"Нет"}}
-        
+          {{applicant.driver_license|default_if_none:"Не указано"|default:"Нет"}}
+      
         </td>
-        </tr>
-        <tr>
+      </tr>
+      <tr>
         <th scope="row">Вредные привычки</th>
         <td>{{applicant.addictions|default_if_none:"Не указано"|default:"Нет"}}</td>
 
-        </tr>
-        <tr>
+      </tr>
+      <tr>
         <th scope="row">Хобби, увлечения</th>
         <td>{{ applicant.hobby|default_if_none:"Не указано"  }}</td>
-        </tr>
-        <tr>
+      </tr>
+      <tr>
         <th scope="row">Национальность</th>
         <td>{{ applicant.nationality|default_if_none:"Не указано"  }}</td>
-        </tr>
+      </tr>
+      <tr>
+        <th scope="row">Примечания</th>
+        <td>{{ applicant.note|default_if_none:""  }}</td>
+      </tr>
     </tbody>
     </table>
 </div>

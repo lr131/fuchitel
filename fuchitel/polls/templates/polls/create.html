@@ -16,17 +16,16 @@
 
     <form method="POST" enctype="multipart/form-data" class="form">
         {% csrf_token %}
-        <div class='hidden' hidden>
-            {{form.questionnaire_num}}
-        </div>
+        
         {% if applicant %}
             <legend class='row justify-content-between'>
-                <div class='col-md-4 m-3'>
-                    {% if applicant %}
-                      Анкета {{applicant.questionnaire_num}} 
-                      <button type="button" class="btn btn-outline-secondary m-3" disabled="disabled">В черный список</button>
-                    {% endif %}
-                </div>
+                {% if applicant %}
+                    <div class='d-inline-flex form-group col-md-9 m-3'>
+                        Анкета: 
+                        <span class="col-md-2">{{form.questionnaire_num}} </span>
+                      <button type="button" class="btn btn-outline-secondary" disabled="disabled">В черный список</button>
+                    </div>
+                {% endif %}
                 <div class='col-md-2 m-3'>
                     <button type="submit" class="btn btn-primary ">Сохранить</button>
                 </div>
@@ -113,10 +112,6 @@
             <div class='col-md-6 col-12'>
                 <legend>Адрес</legend>
                 <div class="form-group">
-                    {{form.registration.label}}
-                    {{form.registration}}
-                </div>
-                <div class="form-group">
                     {{form.address.label}}
                     {{form.address}}
                 </div>
@@ -126,10 +121,6 @@
                 </div>
 
                 <legend>Образование</legend>
-                <div class="form-group">
-                    {{form.education.label}}
-                    {{form.education}}
-                </div>
                 <div class="form-group">
                     {{form.education_descr.label}}
                     {{form.education_descr}}
@@ -175,30 +166,6 @@
                     <div class="form-group col-md-6 col-12">
                         {{form.driver_license.label}}
                         {{form.driver_license}}
-                    </div>
-                </div>
-
-                <legend>Паспортные данные</legend>
-                <div class="row">
-                    <div class="form-group col-md-6 col-12">
-                        Документ
-                        {{form.doc_type}}
-                    </div>
-                    <div class="form-group col-md-6 col-12">
-                        {{form.doc_ser.label}}
-                        {{form.doc_ser}}
-                    </div>
-                    <div class="form-group col-md-6 col-12">
-                        {{form.doc_num.label}}
-                        {{form.doc_num}}
-                    </div>
-                    <div class="form-group col-md-6 col-12">
-                        {{form.doc_date.label}}
-                        {{form.doc_date}}
-                    </div>
-                    <div class="form-group col-md-6 col-12">
-                        {{form.doc_by.label}}
-                        {{form.doc_by}}
                     </div>
                 </div>
                 
